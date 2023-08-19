@@ -10,7 +10,9 @@ class firstscreen extends StatefulWidget {
 
 class _firstscreenState extends State<firstscreen> {
   Future<void> getlocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
     print(position);
 
   }
