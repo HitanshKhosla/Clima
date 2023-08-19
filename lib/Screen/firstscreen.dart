@@ -19,7 +19,7 @@ class _firstscreenState extends State<firstscreen> {
     return Scaffold(
       body: Center(
         child: ElevatedButton(child: Text(
-          'Fetch Location',
+          'Get Location',
         ),
         onPressed:(){
          getlocation();
