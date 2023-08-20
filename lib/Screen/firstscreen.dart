@@ -18,14 +18,18 @@ class _firstscreenState extends State<firstscreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(child: Text(
-          'Get Location',
+    return Expanded(
+      child: SafeArea(
+        child: Scaffold(
+          body: Center(
+            child: ElevatedButton(child: Text(
+              'Get Location',
+            ),
+            onPressed:(){
+             getlocation();
+            },),
+          ),
         ),
-        onPressed:(){
-         getlocation();
-        },),
       ),
     );
   }
