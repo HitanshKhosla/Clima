@@ -9,6 +9,13 @@ class firstscreen extends StatefulWidget {
 }
 
 class _firstscreenState extends State<firstscreen> {
+
+  @override
+  void initState(){
+    super.initState();
+    getlocation();
+  }
+
   Future<void> getlocation() async {
     LocationPermission permission;
     permission = await Geolocator.requestPermission();
@@ -19,16 +26,7 @@ class _firstscreenState extends State<firstscreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: ElevatedButton(child: Text(
-            'Get Location',
-          ),
-          onPressed:(){
-           getlocation();
-          },),
-        ),
-      ),
+      child: Scaffold(),
     );
   }
 }
