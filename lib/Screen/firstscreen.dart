@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:clima/location.dart';
 
 class firstscreen extends StatefulWidget {
   const firstscreen({super.key});
@@ -16,12 +16,11 @@ class _firstscreenState extends State<firstscreen> {
     getlocation();
   }
 
-  Future<void> getlocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
-    print(position);
-
+  void getlocation() async {
+    Location location=Location();
+    await location.getcurrentlocation();
+    print(location.longitude);
+    print(location.latitude);
   }
   @override
   Widget build(BuildContext context) {
