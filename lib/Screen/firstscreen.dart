@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clima/location.dart';
+import 'package:http/http.dart'as http;
 
 class firstscreen extends StatefulWidget {
   const firstscreen({super.key});
@@ -14,6 +15,7 @@ class _firstscreenState extends State<firstscreen> {
   void initState(){
     super.initState();
     getlocation();
+    getdata();
   }
 
   void getlocation() async {
@@ -22,6 +24,11 @@ class _firstscreenState extends State<firstscreen> {
     print(location.longitude);
     print(location.latitude);
   }
+  void getdata()async{
+    http.Response response = await http.get(Uri.https('https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude={part}&appid={API key}'));
+    print(response.body);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
