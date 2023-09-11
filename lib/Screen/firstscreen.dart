@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:clima/location.dart';
-import 'package:http/http.dart'as http;
+import 'package:clima/networking.dart';
+
+
+const apikey = '9697fa9a059bc75f477b33876a1ca5bb';
 
 class firstscreen extends StatefulWidget {
   const firstscreen({super.key});
@@ -10,24 +13,25 @@ class firstscreen extends StatefulWidget {
 }
 
 class _firstscreenState extends State<firstscreen> {
-
+  double? latitude;
+  double? longitude;
   @override
-  void initState(){
+  void initState() {
     super.initState();
     getlocation();
-    getdata();
   }
 
   void getlocation() async {
-    Location location=Location();
+    Location location = Location();
     await location.getcurrentlocation();
-    print(location.longitude);
-    print(location.latitude);
+    longitude = location.longitude;
+    latitude = location.latitude;
+    Network gdata=Network("https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apikey");
+
+    var weather= await gdata.getdata();
   }
-  void getdata()async{
-    http.Response response = await http.get(Uri.https('https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude={part}&appid={API key}'));
-    print(response.body);
-  }
+
+
 
   @override
   Widget build(BuildContext context) {
