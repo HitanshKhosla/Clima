@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:clima/location.dart';
 import 'package:clima/networking.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 
 const apikey = '9697fa9a059bc75f477b33876a1ca5bb';
@@ -29,6 +30,7 @@ class _firstscreenState extends State<firstscreen> {
     Network gdata=Network("https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apikey");
 
     var weather= await gdata.getdata();
+
   }
 
 
@@ -36,7 +38,14 @@ class _firstscreenState extends State<firstscreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(),
+      child: Scaffold(
+        body:Center(
+          child: SpinKitPouringHourGlass(
+            color: Colors.yellow.shade200,
+            size: 75.0,
+          ),
+        ) ,
+      ),
     );
   }
 }
