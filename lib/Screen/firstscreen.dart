@@ -1,8 +1,8 @@
+import 'package:clima/locationscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/location.dart';
 import 'package:clima/networking.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 
 const apikey = '9697fa9a059bc75f477b33876a1ca5bb';
 
@@ -14,8 +14,6 @@ class firstscreen extends StatefulWidget {
 }
 
 class _firstscreenState extends State<firstscreen> {
-  double? latitude;
-  double? longitude;
   @override
   void initState() {
     super.initState();
@@ -25,26 +23,24 @@ class _firstscreenState extends State<firstscreen> {
   void getlocation() async {
     Location location = Location();
     await location.getcurrentlocation();
-    longitude = location.longitude;
-    latitude = location.latitude;
-    Network gdata=Network("https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apikey");
+    Network gdata = Network(
+        "https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apikey&unit=metric");
 
-    var weather= await gdata.getdata();
-
+    var weather = await gdata.getdata();
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+     locationscreen(localweather: weather)));
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body:Center(
+        body: Center(
           child: SpinKitPouringHourGlass(
             color: Colors.yellow.shade200,
             size: 75.0,
           ),
-        ) ,
+        ),
       ),
     );
   }
