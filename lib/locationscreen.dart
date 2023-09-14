@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'weathercondition.dart';
 
 class locationscreen extends StatefulWidget {
   var localweather;
@@ -8,19 +9,24 @@ class locationscreen extends StatefulWidget {
 }
 
 class _State extends State<locationscreen> {
+  weathermodel data=weathermodel();
   late int temperature;
-  int? condition;
+  String? weatherIcon;
   String? cityname;
+  String? message;
   @override
   void initState() {
     super.initState();
+    print(widget.localweather);
     updateU(widget.localweather);
   }
   void updateU(dynamic weatherdata) {
     double temp = weatherdata['main']['temp'];
     temperature = temp.toInt();
-    condition = weatherdata[0]['description'];
+    var condition = weatherdata[0]['id'];
+    weatherIcon=data.getWeatherIcon(condition);
     cityname = weatherdata['sys']['name'];
+    message=data.getMessage(temperature);
   }
 
   @override
