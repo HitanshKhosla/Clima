@@ -1,8 +1,7 @@
 import 'package:clima/locationscreen.dart';
 import 'package:flutter/material.dart';
-import 'package:clima/location.dart';
-import 'package:clima/networking.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:clima/weathercondition.dart';
 
 const apikey = '9697fa9a059bc75f477b33876a1ca5bb';
 
@@ -21,12 +20,8 @@ class _firstscreenState extends State<firstscreen> {
   }
 
   void getlocation() async {
-    Location location = Location();
-    await location.getcurrentlocation();
-    Network gdata = Network(
-        "https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apikey&unit=metric");
-
-    var weather = await gdata.getdata();
+    Weathermodel data=Weathermodel();
+    var weather=await data.weatherlocation();
     Navigator.push(context, MaterialPageRoute(builder: (context)=>
      locationscreen(localweather: weather)));
   }

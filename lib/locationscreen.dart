@@ -9,7 +9,7 @@ class locationscreen extends StatefulWidget {
 }
 
 class _State extends State<locationscreen> {
-  weathermodel data=weathermodel();
+  Weathermodel data = Weathermodel();
   late int temperature;
   String? weatherIcon;
   String? cityname;
@@ -18,15 +18,23 @@ class _State extends State<locationscreen> {
   void initState() {
     super.initState();
     print(widget.localweather);
-    updateU(widget.localweather);
+    updateUI(widget.localweather);
   }
-  void updateU(dynamic weatherdata) {
-    double temp = weatherdata['main']['temp'];
-    temperature = temp.toInt();
-    var condition = weatherdata[0]['id'];
-    weatherIcon=data.getWeatherIcon(condition);
-    cityname = weatherdata['sys']['name'];
-    message=data.getMessage(temperature);
+
+  void updateUI(dynamic weatherdata) {
+    if(weatherdata==null){
+      temperature=0;
+      cityname='no name';
+      weatherIcon='Error';
+    }
+    setState(() {
+      double temp = weatherdata['main']['temp'];
+      temperature = temp.toInt();
+      var condition = weatherdata[0]['id'];
+      weatherIcon = data.getWeatherIcon(condition);
+      cityname = weatherdata['sys']['name'];
+      message = data.getMessage(temperature);
+    });
   }
 
   @override
