@@ -21,7 +21,7 @@ class _firstscreenState extends State<firstscreen> {
 
   void getlocation() async {
     Weathermodel data=Weathermodel();
-    var weather=await data.weatherlocation();
+    var weather=await    data.weatherlocation();
     Navigator.push(context, MaterialPageRoute(builder: (context)=>
      locationscreen(localweather: weather)));
   }
@@ -31,9 +31,9 @@ class _firstscreenState extends State<firstscreen> {
     return SafeArea(
       child: Scaffold(
         body: Center(
-          child: SpinKitPouringHourGlass(
-            color: Colors.yellow.shade200,
-            size: 75.0,
+          child: SpinKitRipple(
+            color: Colors.grey,
+            size: 100.0,
           ),
         ),
       ),

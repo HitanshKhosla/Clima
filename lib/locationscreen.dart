@@ -30,7 +30,7 @@ class _State extends State<locationscreen> {
     setState(() {
       double temp = weatherdata['main']['temp'];
       temperature = temp.toInt();
-      var condition = weatherdata[0]['id'];
+      var condition = weatherdata['weather'][0]['id'];
       weatherIcon = data.getWeatherIcon(condition);
       cityname = weatherdata['sys']['name'];
       message = data.getMessage(temperature);
@@ -39,6 +39,22 @@ class _State extends State<locationscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(fit: BoxFit.fill,
+          image: AssetImage('images/background.jpg')),
+        ),
+        child: Column(
+          children: <Widget>[
+            Row(
+              children:<Widget> [
+
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
