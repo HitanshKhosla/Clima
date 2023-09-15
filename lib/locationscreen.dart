@@ -91,7 +91,7 @@ class _State extends State<locationscreen> {
               ),),
             Text("$weatherIcon",style: TextStyle(fontSize: 70.0,),)
             ],
-          ),SizedBox(height: 200.0,),
+          ),SizedBox(height: 250.0,),
           Expanded(child: Text("$message",style: TextStyle(fontSize: 70.0),))],
         ),
       ),
