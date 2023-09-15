@@ -46,10 +46,11 @@ class _State extends State<locationscreen> {
           image: DecorationImage(
               fit: BoxFit.cover, image: AssetImage('images/background.jpg')),
         ),
-        child: Column(
+        child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             SafeArea(
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextButton(
                     onPressed: () async {
@@ -62,18 +63,36 @@ class _State extends State<locationscreen> {
                       size: 80,
                     ),
                   ),
-                  TextButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                    CityPage()));
-                  }, child: Icon(
-                    Icons.location_city_sharp,
-                    color: Colors.grey.shade800,
-                    size: 80,
-                  ))
+                  TextButton(
+                      onPressed: () async {
+                        var typename = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CityPage()));
+                      if(typename!=null){
+                        var new_weather=data.weathercitylocation(cityname);
+                        updateUI(new_weather);
+                      }
+                        },
+                      child: Icon(
+                        Icons.location_city_sharp,
+                        color: Colors.grey.shade800,
+                        size: 80,
+                      ))
                 ],
               ),
-            )
-          ],
+            ),
+          SizedBox(height: 30.0,),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text("$temperature",style: TextStyle(
+                color: Colors.grey.shade800,
+                fontSize: 130.0
+              ),),
+            Text("$weatherIcon",style: TextStyle(fontSize: 70.0,),)
+            ],
+          ),SizedBox(height: 200.0,),
+          Expanded(child: Text("$message",style: TextStyle(fontSize: 70.0),))],
         ),
       ),
     );

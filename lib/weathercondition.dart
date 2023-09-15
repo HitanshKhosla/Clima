@@ -2,7 +2,13 @@ import 'location.dart';
 import 'networking.dart';
 import 'package:clima/Screen/firstscreen.dart';
 
+
 class Weathermodel {
+  Future<dynamic>weathercitylocation(var cityname) async{
+    Network helper=Network("https://api.openweathermap.org/geo/1.0/direct?q=$cityname&limit=5&appid=$apikey&units=metric");
+    var weather =await helper.getdata();
+    return weather;
+  }
   Future<dynamic> weatherlocation() async {
     Location location = Location();
     await location.getcurrentlocation();
