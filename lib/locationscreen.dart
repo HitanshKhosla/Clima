@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'weathercondition.dart';
+import 'city_location.dart';
 
 class locationscreen extends StatefulWidget {
   var localweather;
@@ -22,10 +23,10 @@ class _State extends State<locationscreen> {
   }
 
   void updateUI(dynamic weatherdata) {
-    if(weatherdata==null){
-      temperature=0;
-      cityname='no name';
-      weatherIcon='Error';
+    if (weatherdata == null) {
+      temperature = 0;
+      cityname = 'no name';
+      weatherIcon = 'Error';
     }
     setState(() {
       double temp = weatherdata['main']['temp'];
@@ -42,15 +43,35 @@ class _State extends State<locationscreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(fit: BoxFit.fill,
-          image: AssetImage('images/background.jpg')),
+          image: DecorationImage(
+              fit: BoxFit.cover, image: AssetImage('images/background.jpg')),
         ),
         child: Column(
           children: <Widget>[
-            Row(
-              children:<Widget> [
-
-              ],
+            SafeArea(
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  TextButton(
+                    onPressed: () async {
+                      var weatherdata = await data.weatherlocation();
+                      updateUI(weatherdata);
+                    },
+                    child: Icon(
+                      Icons.near_me,
+                      color: Colors.grey.shade800,
+                      size: 80,
+                    ),
+                  ),
+                  TextButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                    CityPage()));
+                  }, child: Icon(
+                    Icons.location_city_sharp,
+                    color: Colors.grey.shade800,
+                    size: 80,
+                  ))
+                ],
+              ),
             )
           ],
         ),

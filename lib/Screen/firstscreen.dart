@@ -20,10 +20,12 @@ class _firstscreenState extends State<firstscreen> {
   }
 
   void getlocation() async {
-    Weathermodel data=Weathermodel();
-    var weather=await    data.weatherlocation();
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>
-     locationscreen(localweather: weather)));
+    Weathermodel data = Weathermodel();
+    var weather = await data.weatherlocation();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => locationscreen(localweather: weather)));
   }
 
   @override
